@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       demo_failure:
-        description: Intentionally fail a checkout test to inspect CI artifacts
+        description: Intentionally fail a TodoMVC test to inspect CI artifacts
         type: boolean
         default: false
 
@@ -17,5 +17,5 @@ jobs:
   playwright:
     uses: testingwithekki/ci-platform/.github/workflows/playwright.yml@main
     with:
-      team: checkout
+      team: create
       demo_failure: ${{ inputs.demo_failure || false }}
