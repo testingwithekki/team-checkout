@@ -1,0 +1,21 @@
+name: Playwright CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      demo_failure:
+        description: Intentionally fail a checkout test to inspect CI artifacts
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  playwright:
+    uses: testingwithekki/ci-platform/.github/workflows/playwright.yml@main
+    with:
+      team: checkout
+      demo_failure: ${{ inputs.demo_failure || false }}
