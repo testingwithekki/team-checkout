@@ -1,0 +1,23 @@
+name: QA platform v2
+
+on:
+  workflow_dispatch:
+    inputs:
+      demo_failure:
+        description: Intentionally fail one TodoMVC test
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  playwright:
+    uses: testingwithekki/ci-platform/.github/workflows/playwright-v2.yml@main
+    with:
+      team: create
+      demo_failure: ${{ inputs.demo_failure || false }}
+      gcp_project_id: ${{ vars.QA_V2_PROJECT_ID }}
+      wif_provider: ${{ vars.QA_V2_WIF_PROVIDER }}
+      report_bucket: ${{ vars.QA_V2_REPORT_BUCKET }}
